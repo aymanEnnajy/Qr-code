@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Développeur Web Full-Stack – Portfolio, LinkedIn & CV" />
-  <meta name="author" content="Ton Nom" />
-  <title>Ennajy mohamed ayman</title>
+  <meta name="author" content="Ennajy Mohamed Ayman" />
+  <title>Ennajy Mohamed Ayman - Développeur Web Full-Stack</title>
 
   <!-- Font Awesome 6 CDN (Free) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwIlpP5J0A==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
   <style>
     /* ================== VARIABLES CSS ================== */
@@ -63,12 +62,42 @@
       text-align: center;
       max-width: 520px;
       width: 100%;
+      position: relative;
+    }
+
+    /* ================== IMAGE DE PROFIL ================== */
+    .profile-image {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      overflow: hidden;
+      border: 4px solid var(--accent);
+      box-shadow: var(--shadow-dark);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
+      border-color: var(--accent-hover);
+    }
+
+    .light-mode .profile-image {
+      box-shadow: var(--shadow-light);
     }
 
     .name {
       font-size: 2.4rem;
       font-weight: 800;
-      margin-bottom: 2.2rem;
+      margin-bottom: 0.5rem;
       letter-spacing: -0.8px;
       background: linear-gradient(110deg, #0ea5e9, #8b5cf6);
       -webkit-background-clip: text;
@@ -77,11 +106,24 @@
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
 
+    .title {
+      font-size: 1.1rem;
+      margin-bottom: 2.2rem;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .light-mode .title {
+      color: #64748b;
+    }
+
     /* ================== CARD BUTTONS ================== */
     .action-card {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
       width: 100%;
-      padding: 1.4rem;
+      padding: 1.4rem 1.8rem;
       margin: 0.9rem 0;
       text-decoration: none;
       border-radius: var(--radius);
@@ -105,22 +147,20 @@
     }
 
     .action-card:hover {
-      transform: translateY(-6px) rotateX(4deg) scale(1.015);
+      transform: translateY(-6px) scale(1.015);
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-      color: #ffffff;
     }
 
     .light-mode .action-card:hover {
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
-      color: var(--text-dark);
     }
 
     .action-card i {
-      margin-right: 12px;
+      margin-right: 14px;
       font-size: 1.35rem;
       width: 28px;
       text-align: center;
-      vertical-align: -0.15em;
+      transition: var(--transition);
     }
 
     .action-card:hover i {
@@ -128,13 +168,35 @@
     }
 
     /* Accent colors on hover (brand-specific) */
-    #portfolio:hover { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; }
-    #linkedin:hover  { background: linear-gradient(135deg, #0a66c2, #0d4a8a); color: white; }
-    #cv:hover        { background: linear-gradient(135deg, #ef4444, #b91c1c); color: white; }
+    #portfolio:hover { 
+      background: linear-gradient(135deg, #1e293b, #0f172a); 
+      color: white; 
+    }
+    
+    #linkedin:hover  { 
+      background: linear-gradient(135deg, #0a66c2, #0d4a8a); 
+      color: white; 
+    }
+    
+    #cv:hover { 
+      background: linear-gradient(135deg, #ef4444, #b91c1c); 
+      color: white; 
+    }
 
-    .light-mode #portfolio:hover { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
-    .light-mode #linkedin:hover  { background: linear-gradient(135deg, #dbeafe, #93c5fd); }
-    .light-mode #cv:hover        { background: linear-gradient(135deg, #fee2e2, #fecaca); }
+    .light-mode #portfolio:hover { 
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe); 
+      color: var(--text-dark);
+    }
+    
+    .light-mode #linkedin:hover  { 
+      background: linear-gradient(135deg, #dbeafe, #93c5fd); 
+      color: var(--text-dark);
+    }
+    
+    .light-mode #cv:hover { 
+      background: linear-gradient(135deg, #fee2e2, #fecaca); 
+      color: var(--text-dark);
+    }
 
     /* ================== THEME TOGGLE ================== */
     .theme-toggle-btn {
@@ -170,34 +232,44 @@
     /* ================== RESPONSIVE ================== */
     @media (max-width: 600px) {
       .name { font-size: 2rem; }
-      .action-card { padding: 1.2rem; font-size: 1.05rem; }
+      .title { font-size: 1rem; }
+      .action-card { padding: 1.2rem 1.5rem; font-size: 1.05rem; }
       .action-card i { font-size: 1.2rem; }
+      .profile-image { width: 120px; height: 120px; }
     }
 
     @media (max-width: 360px) {
       .name { font-size: 1.8rem; }
-      .action-card { padding: 1rem; }
+      .action-card { padding: 1rem 1.2rem; }
+      .profile-image { width: 100px; height: 100px; }
     }
   </style>
 </head>
 <body>
   <!-- Bouton de changement de thème -->
   <button class="theme-toggle-btn" aria-label="Changer le thème" id="themeToggle">
-    <i class="fas fa-sun"></i>
+    <i class="fas fa-moon"></i>
   </button>
 
   <div class="profile-container">
-    <h1 class="name">Ennajy Mohamed Ayman </h1>
+    <!-- Image de profil -->
+    <div class="profile-image">
+      <img src="https://aymanennajy.github.io/MyPortfolio/images/Design%20sans%20titre%20(33).png" alt="Ennajy Mohamed Ayman" />
+    </div>
+
+    <h1 class="name">Ennajy Mohamed Ayman</h1>
+    <p class="title">Développeur Web Full-Stack</p>
 
     <a href="https://aymanennajy.github.io/MyPortfolio/index.html" id="portfolio" class="action-card" target="_blank" rel="noopener">
       <i class="fas fa-briefcase"></i> Voir mon portfolio
     </a>
 
     <a href="https://www.linkedin.com/in/mohamed-ayman-ennajy-1689a0258/" id="linkedin" class="action-card" target="_blank" rel="noopener">
-      <i class="fab fa-linkedin-in"></i> Mon LinkedIn
+      <i class="fa-brands fa-linkedin"></i>
+ Mon LinkedIn
     </a>
 
-    <a href="cv.pdf" id="cv" class="action-card" download="CV_TonNom.pdf" target="_blank" rel="noopener">
+    <a href="cv.pdf" id="cv" class="action-card" download="CV_Ennajy_Mohamed_Ayman.pdf" target="_blank" rel="noopener">
       <i class="fas fa-file-pdf"></i> Télécharger mon CV (PDF)
     </a>
   </div>
@@ -212,7 +284,7 @@
     const savedTheme = localStorage.getItem('theme') || 'dark';
     if (savedTheme === 'light') {
       body.classList.add('light-mode');
-      icon.classList.replace('fa-sun', 'fa-moon');
+      icon.classList.replace('fa-moon', 'fa-sun');
     }
 
     toggleBtn.addEventListener('click', () => {
@@ -221,10 +293,10 @@
       
       // Basculer l'icône
       if (isLight) {
-        icon.classList.replace('fa-sun', 'fa-moon');
+        icon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('theme', 'light');
       } else {
-        icon.classList.replace('fa-moon', 'fa-sun');
+        icon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'dark');
       }
     });
