@@ -4,71 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Ayman Ennajy | Full Stack Developer</title>
-  <meta name="description" content="Professional portfolio of Ayman Ennajy, Full Stack Web Developer. Showcasing skills, experience, and contact." />
+  <meta name="description" content="Professional portfolio of Ayman Ennajy, Full Stack Web Developer. No scroll - everything visible at a glance." />
   
   <!-- Tailwind CSS + Font Awesome + Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   
-  <!-- Custom Tailwind configuration (overrides) -->
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
     body {
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      transition: background-color 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), color 0.3s ease;
+      transition: background-color 0.4s cubic-bezier(0.2, 0.9, 0.4, 1), color 0.3s ease;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
     }
+    
     /* Smooth glass morphism effects & micro-interactions */
-    .glass-card {
-      backdrop-filter: blur(2px);
-      transition: all 0.3s ease;
-    }
     .hover-lift {
       transition: transform 0.25s ease, box-shadow 0.3s ease, background-color 0.2s;
     }
     .hover-lift:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
     }
-    .theme-transition {
-      transition: background-color 0.3s ease, border-color 0.2s, color 0.2s;
-    }
-    /* Custom scrollbar for modern look */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1e1e2f;
-    }
-    body.light ::-webkit-scrollbar-track {
-      background: #e2e8f0;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #0ea5e9;
-      border-radius: 12px;
-    }
+    
     /* animated gradient accent line */
     .accent-glow {
       background: linear-gradient(90deg, #0ea5e9, #38bdf8, #0ea5e9);
       background-size: 200% auto;
       animation: shimmer 2s linear infinite;
     }
+    
     @keyframes shimmer {
       0% { background-position: 0% 0; }
       100% { background-position: 200% 0; }
     }
-    .profile-img-border {
-      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
+    
+    /* Custom scrollbar hidden - no scroll needed */
+    ::-webkit-scrollbar {
+      display: none;
     }
-    body.light .profile-img-border {
-      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
+    
+    /* Perfect centering with flex */
+    .fullscreen-center {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    /* Card content spacing optimized for no-scroll */
+    .no-scroll-container {
+      max-height: 98vh;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .no-scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Ensure content fits perfectly */
+    @media (max-height: 700px) {
+      .compact-spacing {
+        gap: 0.5rem;
+      }
+      .avatar-size {
+        width: 100px;
+        height: 100px;
+      }
+      .title-size {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
-<body class="bg-[#0a0a0a] text-[#eef2ff] antialiased selection:bg-sky-500/30">
+<body class="bg-[#0a0a0a] text-[#eef2ff] antialiased selection:bg-sky-500/30 overflow-hidden">
 
   <!-- ========== FLOATING BUTTONS (theme + lang) with modern UI ========= -->
   <div class="fixed top-5 right-5 z-50 flex gap-3">
@@ -82,101 +100,102 @@
     </button>
   </div>
 
-  <!-- main container: mobile-first padding, responsive max-width -->
-  <main class="min-h-screen flex items-center justify-center px-5 py-16 md:py-20">
-    <div class="w-full max-w-2xl mx-auto relative">
+  <!-- main container: full viewport with perfect centering - NO SCROLL -->
+  <div class="fullscreen-center w-full px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-3xl mx-auto">
       
-      <!-- Profile card with elegant glass effect & depth -->
-      <div class="relative bg-[#111111]/80 backdrop-blur-sm rounded-3xl border border-white/10 p-6 sm:p-8 shadow-2xl transition-all duration-500 theme-transparent">
+      <!-- Profile card with elegant glass effect - optimized for no scroll -->
+      <div class="relative bg-[#111111]/80 backdrop-blur-sm rounded-3xl border border-white/10 shadow-2xl transition-all duration-500 p-5 sm:p-7 lg:p-8 no-scroll-container">
         
         <!-- accent line decoration above avatar -->
         <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-1 rounded-full accent-glow"></div>
         
-        <!-- Avatar section with ring effect & micro interaction -->
+        <!-- Avatar section with ring effect -->
         <div class="flex flex-col items-center text-center">
           <div class="relative group">
-            <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-br from-sky-400 to-blue-600 shadow-xl profile-img-border">
+            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-br from-sky-400 to-blue-600 shadow-xl">
               <div class="w-full h-full rounded-full overflow-hidden bg-gray-800 ring-2 ring-white/20 group-hover:scale-[1.02] transition-transform duration-300">
-                <img src="1764955062357.jpg" alt="Ayman Ennajy - Full Stack Developer" class="w-full h-full object-cover">
+                <img src="1764955062357.jpg" alt="Ayman Ennajy - Full Stack Developer" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?background=0EA5E9&color=fff&bold=true&size=128&name=Ayman+E'">
               </div>
             </div>
             <!-- online badge / dev status -->
-            <div class="absolute bottom-2 right-2 bg-emerald-500 w-4 h-4 rounded-full border-2 border-white shadow-md"></div>
+            <div class="absolute bottom-1 right-1 bg-emerald-500 w-3.5 h-3.5 rounded-full border-2 border-white shadow-md"></div>
           </div>
           
-          <h1 class="text-3xl sm:text-4xl font-extrabold mt-6 tracking-tight bg-gradient-to-r from-white to-sky-300 bg-clip-text text-transparent">Ennajy Mohamed Ayman</h1>
+          <h1 class="text-2xl sm:text-3xl font-extrabold mt-4 tracking-tight bg-gradient-to-r from-white to-sky-300 bg-clip-text text-transparent">Ennajy Mohamed Ayman</h1>
           
           <!-- dynamic title with inline badge style -->
           <div class="mt-2 flex items-center justify-center gap-2 flex-wrap">
-            <span class="px-3 py-1 text-sm rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-300 font-medium backdrop-blur-sm">
+            <span class="px-3 py-1 text-xs sm:text-sm rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-300 font-medium backdrop-blur-sm">
               <i class="fas fa-code mr-1 text-xs"></i>
               <span id="title">Full Stack Web Developer</span>
             </span>
           </div>
           
-          <!-- short bio / tagline -->
-          <p class="text-gray-400 text-sm sm:text-base mt-4 max-w-md mx-auto leading-relaxed">
+          <!-- short bio / tagline - compact for no scroll -->
+          <p class="text-gray-400 text-xs sm:text-sm mt-2 max-w-md mx-auto leading-relaxed">
             <i class="fas fa-map-marker-alt text-sky-400 mr-1"></i> Morocco · 
-            <i class="fas fa-laptop-code ml-1 mr-1 text-sky-400"></i> 3+ years experience
+            <i class="fas fa-laptop-code ml-1 mr-1 text-sky-400"></i> Full-Stack Expert
           </p>
         </div>
         
-        <!-- Action Cards Grid - modern responsive, clean -->
-        <div class="mt-8 space-y-4">
+        <!-- Action Cards Grid - modern responsive, compact spacing for no scroll -->
+        <div class="mt-5 space-y-3">
           <!-- Portfolio card -->
-          <a href="https://ennajy-mohamed-ayman.vercel.app/" target="_blank" rel="noopener noreferrer" class="action-item group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
-            <div class="w-12 h-12 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-400 group-hover:bg-sky-500/30 transition-colors">
-              <i class="fas fa-briefcase text-xl"></i>
+          <a href="https://ennajy-mohamed-ayman.vercel.app/" target="_blank" rel="noopener noreferrer" class="action-item group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-400 group-hover:bg-sky-500/30 transition-colors">
+              <i class="fas fa-briefcase text-lg sm:text-xl"></i>
             </div>
             <div class="flex-1">
-              <h3 class="font-semibold text-lg" id="portfolioText">Portfolio</h3>
-              <p class="text-sm text-gray-400 group-hover:text-gray-300 transition">Explore my latest projects & work</p>
+              <h3 class="font-semibold text-base sm:text-lg" id="portfolioText">Portfolio</h3>
+              <p class="text-xs text-gray-400 group-hover:text-gray-300 transition">Explore my latest projects & work</p>
             </div>
-            <i class="fas fa-arrow-right text-gray-500 group-hover:text-sky-400 transition-transform group-hover:translate-x-1"></i>
+            <i class="fas fa-arrow-right text-gray-500 group-hover:text-sky-400 transition-transform group-hover:translate-x-1 text-sm"></i>
           </a>
           
           <!-- LinkedIn card -->
-          <a href="https://www.linkedin.com/in/mohamed-ayman-ennajy-1689a0258/" target="_blank" rel="noopener noreferrer" class="action-item group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
-            <div class="w-12 h-12 rounded-xl bg-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] group-hover:bg-[#0A66C2]/30 transition-colors">
-              <i class="fab fa-linkedin-in text-xl"></i>
+          <a href="https://www.linkedin.com/in/mohamed-ayman-ennajy-1689a0258/" target="_blank" rel="noopener noreferrer" class="action-item group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] group-hover:bg-[#0A66C2]/30 transition-colors">
+              <i class="fab fa-linkedin-in text-lg sm:text-xl"></i>
             </div>
             <div class="flex-1">
-              <h3 class="font-semibold text-lg" id="linkedinText">LinkedIn</h3>
-              <p class="text-sm text-gray-400 group-hover:text-gray-300">Let's connect professionally</p>
+              <h3 class="font-semibold text-base sm:text-lg" id="linkedinText">LinkedIn</h3>
+              <p class="text-xs text-gray-400 group-hover:text-gray-300">Let's connect professionally</p>
             </div>
-            <i class="fas fa-arrow-right text-gray-500 group-hover:text-sky-400 transition-transform group-hover:translate-x-1"></i>
+            <i class="fas fa-arrow-right text-gray-500 group-hover:text-sky-400 transition-transform group-hover:translate-x-1 text-sm"></i>
           </a>
           
-          <!-- CV Download card with file icon highlight -->
-          <a href="#" id="cvLink" target="_blank" class="action-item group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
-            <div class="w-12 h-12 rounded-xl bg-rose-500/20 flex items-center justify-center text-rose-400 group-hover:bg-rose-500/30 transition-colors">
-              <i class="fas fa-file-pdf text-xl"></i>
+          <!-- CV Download card -->
+          <a href="#" id="cvLink" target="_blank" class="action-item group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-500/20 flex items-center justify-center text-rose-400 group-hover:bg-rose-500/30 transition-colors">
+              <i class="fas fa-file-pdf text-lg sm:text-xl"></i>
             </div>
             <div class="flex-1">
-              <h3 class="font-semibold text-lg" id="cvText">Resume / CV</h3>
-              <p class="text-sm text-gray-400 group-hover:text-gray-300">Download latest version (PDF)</p>
+              <h3 class="font-semibold text-base sm:text-lg" id="cvText">Resume / CV</h3>
+              <p class="text-xs text-gray-400 group-hover:text-gray-300">Download latest version (PDF)</p>
             </div>
-            <i class="fas fa-download text-gray-500 group-hover:text-rose-400 transition-transform group-hover:translate-y-0.5"></i>
+            <i class="fas fa-download text-gray-500 group-hover:text-rose-400 transition-transform group-hover:translate-y-0.5 text-sm"></i>
           </a>
         </div>
         
-        <!-- Social / Tech Stack mini indicators (modern touch) -->
-        <div class="mt-8 pt-4 border-t border-white/10 flex flex-wrap justify-center gap-5 text-gray-400 text-sm">
-          <div class="flex items-center gap-2"><i class="fab fa-react text-sky-400"></i> React</div>
-          <div class="flex items-center gap-2"><i class="fab fa-node-js text-emerald-400"></i> Node.js</div>
-          <div class="flex items-center gap-2"><i class="fab fa-python text-blue-400"></i> Python</div>
-          <div class="flex items-center gap-2"><i class="fas fa-database text-amber-400"></i> SQL/NoSQL</div>
+        <!-- Social / Tech Stack mini indicators (compact for no scroll) -->
+        <div class="mt-5 pt-3 border-t border-white/10 flex flex-wrap justify-center gap-4 text-gray-400 text-xs sm:text-sm">
+          <div class="flex items-center gap-1.5"><i class="fab fa-react text-sky-400 text-xs"></i> React</div>
+          <div class="flex items-center gap-1.5"><i class="fab fa-node-js text-emerald-400 text-xs"></i> Node.js</div>
+          <div class="flex items-center gap-1.5"><i class="fab fa-python text-blue-400 text-xs"></i> Python</div>
+          <div class="flex items-center gap-1.5"><i class="fas fa-database text-amber-400 text-xs"></i> SQL/NoSQL</div>
+          <div class="flex items-center gap-1.5"><i class="fab fa-tailwind text-sky-400 text-xs"></i> Tailwind</div>
         </div>
         
-        <!-- Footer micro note / last update -->
-        <div class="mt-6 text-center text-gray-500 text-xs flex justify-center gap-4">
+        <!-- Footer micro note / contact - ultra compact -->
+        <div class="mt-4 text-center text-gray-500 text-[11px] sm:text-xs flex justify-center gap-3 flex-wrap">
           <span><i class="far fa-envelope mr-1"></i> ayman.ennajy@example.com</span>
-          <span class="hidden sm:inline-block">•</span>
+          <span class="hidden xs:inline-block">•</span>
           <span><i class="far fa-calendar-alt mr-1"></i> Available for opportunities</span>
         </div>
       </div>
     </div>
-  </main>
+  </div>
 
   <script>
     // --------------------------------------------------------------
@@ -186,31 +205,29 @@
     const themeBtn = document.getElementById('themeToggle');
     const themeIcon = themeBtn.querySelector('i');
     
-    // apply theme function with dynamic class updates for tailwind dark/light
+    // apply theme function with dynamic class updates
     function setTheme(themeMode) {
       if (themeMode === 'light') {
         bodyEl.classList.add('light');
         bodyEl.style.backgroundColor = '#f1f5f9';
         bodyEl.style.color = '#0f172a';
-        // override card backgrounds dynamically (tailwind classes replaced by style)
-        document.querySelectorAll('.action-item, .relative.bg-\\[\\#111111\\]\\/80').forEach(el => {
-          if (el.classList.contains('action-item')) {
-            el.classList.add('bg-white/80', 'border-gray-200');
-            el.classList.remove('bg-white/5', 'border-white/10');
-          }
+        // update card backgrounds
+        document.querySelectorAll('.action-item').forEach(el => {
+          el.classList.add('bg-white/80', 'border-gray-200');
+          el.classList.remove('bg-white/5', 'border-white/10');
         });
         const mainCard = document.querySelector('.relative.bg-\\[\\#111111\\]\\/80');
         if (mainCard) {
           mainCard.classList.add('bg-white/90', 'border-gray-200/60');
           mainCard.classList.remove('bg-[#111111]/80', 'border-white/10');
         }
-        // text adjustments for light mode
         document.querySelectorAll('.text-gray-400').forEach(el => {
-          if (el.classList.contains('group-hover:text-gray-300')) return;
-          el.classList.add('text-gray-500');
+          if (!el.classList.contains('group-hover:text-gray-300')) 
+            el.classList.add('text-gray-500');
           el.classList.remove('text-gray-400');
         });
         document.querySelectorAll('.border-white\\/10').forEach(el => {
+          if (!el.classList.contains('border-white/10')) return;
           el.classList.add('border-gray-200/60');
           el.classList.remove('border-white/10');
         });
@@ -230,8 +247,8 @@
           mainCard.classList.remove('bg-white/90', 'border-gray-200/60');
         }
         document.querySelectorAll('.text-gray-500').forEach(el => {
-          if (el.classList.contains('group-hover:text-gray-300')) return;
-          el.classList.add('text-gray-400');
+          if (!el.classList.contains('group-hover:text-gray-300')) 
+            el.classList.add('text-gray-400');
           el.classList.remove('text-gray-500');
         });
         document.querySelectorAll('.border-gray-200\\/60').forEach(el => {
@@ -260,44 +277,38 @@
       setTheme(isLight ? 'dark' : 'light');
     });
     
-    // handle dynamic classes on load for action items & border resets (ensure consistency)
+    // ensure classes sync on load
     function syncLightModeClasses() {
       if (bodyEl.classList.contains('light')) {
         document.querySelectorAll('.action-item').forEach(el => {
-          el.classList.add('bg-white/80', 'border-gray-200');
-          el.classList.remove('bg-white/5', 'border-white/10');
+          if (!el.classList.contains('bg-white/80')) {
+            el.classList.add('bg-white/80', 'border-gray-200');
+            el.classList.remove('bg-white/5', 'border-white/10');
+          }
         });
         const card = document.querySelector('.relative');
         if (card && card.classList.contains('bg-[#111111]/80')) {
           card.classList.add('bg-white/90', 'border-gray-200/60');
           card.classList.remove('bg-[#111111]/80', 'border-white/10');
         }
-        document.querySelectorAll('.text-gray-400').forEach(el => {
-          if (!el.classList.contains('group-hover:text-gray-300')) 
-            el.classList.add('text-gray-500');
-          el.classList.remove('text-gray-400');
-        });
       } else {
         document.querySelectorAll('.action-item').forEach(el => {
-          el.classList.add('bg-white/5', 'border-white/10');
-          el.classList.remove('bg-white/80', 'border-gray-200');
+          if (!el.classList.contains('bg-white/5')) {
+            el.classList.add('bg-white/5', 'border-white/10');
+            el.classList.remove('bg-white/80', 'border-gray-200');
+          }
         });
         const cardLight = document.querySelector('.relative.bg-white\\/90');
         if (cardLight) {
           cardLight.classList.add('bg-[#111111]/80', 'border-white/10');
           cardLight.classList.remove('bg-white/90', 'border-gray-200/60');
         }
-        document.querySelectorAll('.text-gray-500').forEach(el => {
-          if (!el.classList.contains('group-hover:text-gray-300')) 
-            el.classList.add('text-gray-400');
-          el.classList.remove('text-gray-500');
-        });
       }
     }
-    setTimeout(syncLightModeClasses, 10);
+    setTimeout(syncLightModeClasses, 50);
     
     // --------------------------------------------------------------
-    // 2. BILINGUAL SYSTEM (FR/EN) with extended text
+    // 2. BILINGUAL SYSTEM (FR/EN)
     // --------------------------------------------------------------
     const langBtn = document.getElementById('langToggle');
     
@@ -328,7 +339,6 @@
       const cvAnchor = document.getElementById('cvLink');
       if (cvAnchor) cvAnchor.href = dictionary[lang].cvLink;
       
-      // update button label
       langBtn.innerText = lang === 'fr' ? 'EN' : 'FR';
       localStorage.setItem('lang', lang);
     }
@@ -340,25 +350,13 @@
       applyLanguage(currentLanguage);
     });
     
-    // extra: small hover effect on profile image alt message (optional)
-    const profileImgDiv = document.querySelector('.profile-img-border');
-    if(profileImgDiv) {
-      profileImgDiv.addEventListener('mouseenter', () => {
-        // just subtle micro class (no console)
-      });
+    // fix CV link on load
+    const cvLinkElem = document.getElementById('cvLink');
+    if (cvLinkElem && (!cvLinkElem.getAttribute('href') || cvLinkElem.getAttribute('href') === '#')) {
+      cvLinkElem.href = currentLanguage === 'fr' ? dictionary.fr.cvLink : dictionary.en.cvLink;
     }
     
-    // ensure on window resize or any dynamic content, fix card class theme
-    window.addEventListener('load', () => {
-      syncLightModeClasses();
-      // adjust for any missing interactive details
-      const cvLinkElem = document.getElementById('cvLink');
-      if (cvLinkElem && cvLinkElem.getAttribute('href') === '#') {
-        cvLinkElem.href = currentLanguage === 'fr' ? dictionary.fr.cvLink : dictionary.en.cvLink;
-      }
-    });
-    
-    // preload images & fix broken fallback (optional but no error)
+    // handle image error gracefully
     const userImg = document.querySelector('img');
     if(userImg && !userImg.complete) {
       userImg.onerror = () => {
@@ -366,23 +364,32 @@
       };
     }
     
-    // additional hover enhancements for action cards: already have hover-lift in css
-    // make icons responsive & ensure mobile tap targets.
-    const allCards = document.querySelectorAll('.action-item');
-    allCards.forEach(card => {
-      card.addEventListener('touchstart', () => {}, {passive: true});
-    });
-    
-    // scroll reveal subtle entrance (not needed but improves feel)
-    const mainContainer = document.querySelector('.relative.bg-\\[\\#111111\\]\\/80');
-    if (mainContainer) {
-      mainContainer.style.opacity = '0';
-      mainContainer.style.transform = 'translateY(18px)';
-      mainContainer.style.transition = 'opacity 0.55s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.5s ease';
+    // subtle entrance animation
+    const mainCard = document.querySelector('.relative.bg-\\[\\#111111\\]\\/80');
+    if (mainCard) {
+      mainCard.style.opacity = '0';
+      mainCard.style.transform = 'translateY(15px)';
+      mainCard.style.transition = 'opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.5s ease';
       setTimeout(() => {
-        mainContainer.style.opacity = '1';
-        mainContainer.style.transform = 'translateY(0)';
-      }, 80);
+        mainCard.style.opacity = '1';
+        mainCard.style.transform = 'translateY(0)';
+      }, 50);
+    }
+    
+    // Ensure no scroll on body at all times
+    window.addEventListener('resize', () => {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    });
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    
+    // Handle ultra-small screens (height < 600px) by slightly reducing padding
+    if (window.innerHeight < 600) {
+      const card = document.querySelector('.relative');
+      if (card) {
+        card.classList.add('py-3');
+      }
     }
   </script>
 </body>
