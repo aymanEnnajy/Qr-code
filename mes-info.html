@@ -1,218 +1,389 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ayman Ennajy - Full Stack Developer</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ayman Ennajy | Full Stack Developer</title>
+  <meta name="description" content="Professional portfolio of Ayman Ennajy, Full Stack Web Developer. Showcasing skills, experience, and contact." />
+  
+  <!-- Tailwind CSS + Font Awesome + Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  
+  <!-- Custom Tailwind configuration (overrides) -->
   <style>
-    :root {
-      --bg-dark: #0a0a0a;
-      --bg-light: #f8fafc;
-      --card-dark: #151515;
-      --card-light: #ffffff;
-      --text-dark: #0f172a;
-      --text-light: #e2e8f0;
-      --accent: #0ea5e9;
-      --radius: 20px;
-      --transition: all 0.35s ease;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    * { margin:0; padding:0; box-sizing:border-box; }
-
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      transition: var(--transition);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      transition: background-color 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), color 0.3s ease;
     }
-
-    body.light-mode {
-      background: var(--bg-light);
-      color: var(--text-dark);
+    /* Smooth glass morphism effects & micro-interactions */
+    .glass-card {
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
     }
-
-    .profile-container {
-      text-align:center;
-      max-width:500px;
-      width:100%;
-      position:relative;
+    .hover-lift {
+      transition: transform 0.25s ease, box-shadow 0.3s ease, background-color 0.2s;
     }
-
-    .profile-image {
-      width:130px;
-      height:130px;
-      border-radius:50%;
-      overflow:hidden;
-      margin:auto;
-      border:4px solid var(--accent);
+    .hover-lift:hover {
+      transform: translateY(-6px);
     }
-
-    .profile-image img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .theme-transition {
+      transition: background-color 0.3s ease, border-color 0.2s, color 0.2s;
     }
-
-    .name {
-      font-size:2.2rem;
-      margin-top:15px;
+    /* Custom scrollbar for modern look */
+    ::-webkit-scrollbar {
+      width: 6px;
     }
-
-    .title {
-      margin-bottom:25px;
-      color:#94a3b8;
+    ::-webkit-scrollbar-track {
+      background: #1e1e2f;
     }
-
-    .action-card {
-      display:flex;
-      align-items:center;
-      padding:15px;
-      margin:10px 0;
-      border-radius:15px;
-      text-decoration:none;
-      background:var(--card-dark);
-      color:var(--text-light);
-      transition:0.3s;
+    body.light ::-webkit-scrollbar-track {
+      background: #e2e8f0;
     }
-
-    .light-mode .action-card {
-      background:var(--card-light);
-      color:var(--text-dark);
+    ::-webkit-scrollbar-thumb {
+      background: #0ea5e9;
+      border-radius: 12px;
     }
-
-    .action-card i {
-      margin-right:10px;
+    /* animated gradient accent line */
+    .accent-glow {
+      background: linear-gradient(90deg, #0ea5e9, #38bdf8, #0ea5e9);
+      background-size: 200% auto;
+      animation: shimmer 2s linear infinite;
     }
-
-    .action-card:hover {
-      transform:translateY(-5px);
+    @keyframes shimmer {
+      0% { background-position: 0% 0; }
+      100% { background-position: 200% 0; }
     }
-
-    /* Buttons */
-    .theme-toggle-btn, .lang-toggle-btn {
-      position:absolute;
-      top:20px;
-      width:45px;
-      height:45px;
-      border:none;
-      border-radius:50%;
-      cursor:pointer;
-      font-size:1.2rem;
+    .profile-img-border {
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
     }
-
-    .theme-toggle-btn {
-      right:20px;
+    body.light .profile-img-border {
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
     }
-
-    .lang-toggle-btn {
-      left:20px;
-    }
-
   </style>
 </head>
+<body class="bg-[#0a0a0a] text-[#eef2ff] antialiased selection:bg-sky-500/30">
 
-<body>
-
-<!-- Language Button -->
-<button class="lang-toggle-btn" id="langToggle">EN</button>
-
-<!-- Theme Button -->
-<button class="theme-toggle-btn" id="themeToggle">
-  <i class="fas fa-moon"></i>
-</button>
-
-<div class="profile-container">
-
-  <div class="profile-image">
-    <img src="1764955062357.jpg">
+  <!-- ========== FLOATING BUTTONS (theme + lang) with modern UI ========= -->
+  <div class="fixed top-5 right-5 z-50 flex gap-3">
+    <button id="themeToggle" class="w-11 h-11 rounded-full backdrop-blur-md bg-white/10 border border-white/20 shadow-lg flex items-center justify-center text-sky-400 hover:bg-white/20 transition-all duration-300 hover:scale-105 active:scale-95" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon text-xl"></i>
+    </button>
+  </div>
+  <div class="fixed top-5 left-5 z-50">
+    <button id="langToggle" class="w-11 h-11 rounded-full backdrop-blur-md bg-white/10 border border-white/20 shadow-lg flex items-center justify-center font-semibold text-sm text-sky-300 hover:bg-white/20 transition-all duration-300 hover:scale-105 active:scale-95 tracking-wide">
+      EN
+    </button>
   </div>
 
-  <h1 class="name">Ennajy Mohamed Ayman</h1>
-  <p class="title" id="title">Développeur Web Full-Stack</p>
+  <!-- main container: mobile-first padding, responsive max-width -->
+  <main class="min-h-screen flex items-center justify-center px-5 py-16 md:py-20">
+    <div class="w-full max-w-2xl mx-auto relative">
+      
+      <!-- Profile card with elegant glass effect & depth -->
+      <div class="relative bg-[#111111]/80 backdrop-blur-sm rounded-3xl border border-white/10 p-6 sm:p-8 shadow-2xl transition-all duration-500 theme-transparent">
+        
+        <!-- accent line decoration above avatar -->
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-1 rounded-full accent-glow"></div>
+        
+        <!-- Avatar section with ring effect & micro interaction -->
+        <div class="flex flex-col items-center text-center">
+          <div class="relative group">
+            <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-br from-sky-400 to-blue-600 shadow-xl profile-img-border">
+              <div class="w-full h-full rounded-full overflow-hidden bg-gray-800 ring-2 ring-white/20 group-hover:scale-[1.02] transition-transform duration-300">
+                <img src="1764955062357.jpg" alt="Ayman Ennajy - Full Stack Developer" class="w-full h-full object-cover">
+              </div>
+            </div>
+            <!-- online badge / dev status -->
+            <div class="absolute bottom-2 right-2 bg-emerald-500 w-4 h-4 rounded-full border-2 border-white shadow-md"></div>
+          </div>
+          
+          <h1 class="text-3xl sm:text-4xl font-extrabold mt-6 tracking-tight bg-gradient-to-r from-white to-sky-300 bg-clip-text text-transparent">Ennajy Mohamed Ayman</h1>
+          
+          <!-- dynamic title with inline badge style -->
+          <div class="mt-2 flex items-center justify-center gap-2 flex-wrap">
+            <span class="px-3 py-1 text-sm rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-300 font-medium backdrop-blur-sm">
+              <i class="fas fa-code mr-1 text-xs"></i>
+              <span id="title">Full Stack Web Developer</span>
+            </span>
+          </div>
+          
+          <!-- short bio / tagline -->
+          <p class="text-gray-400 text-sm sm:text-base mt-4 max-w-md mx-auto leading-relaxed">
+            <i class="fas fa-map-marker-alt text-sky-400 mr-1"></i> Morocco · 
+            <i class="fas fa-laptop-code ml-1 mr-1 text-sky-400"></i> 3+ years experience
+          </p>
+        </div>
+        
+        <!-- Action Cards Grid - modern responsive, clean -->
+        <div class="mt-8 space-y-4">
+          <!-- Portfolio card -->
+          <a href="https://ennajy-mohamed-ayman.vercel.app/" target="_blank" rel="noopener noreferrer" class="action-item group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
+            <div class="w-12 h-12 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-400 group-hover:bg-sky-500/30 transition-colors">
+              <i class="fas fa-briefcase text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-lg" id="portfolioText">Portfolio</h3>
+              <p class="text-sm text-gray-400 group-hover:text-gray-300 transition">Explore my latest projects & work</p>
+            </div>
+            <i class="fas fa-arrow-right text-gray-500 group-hover:text-sky-400 transition-transform group-hover:translate-x-1"></i>
+          </a>
+          
+          <!-- LinkedIn card -->
+          <a href="https://www.linkedin.com/in/mohamed-ayman-ennajy-1689a0258/" target="_blank" rel="noopener noreferrer" class="action-item group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
+            <div class="w-12 h-12 rounded-xl bg-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] group-hover:bg-[#0A66C2]/30 transition-colors">
+              <i class="fab fa-linkedin-in text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-lg" id="linkedinText">LinkedIn</h3>
+              <p class="text-sm text-gray-400 group-hover:text-gray-300">Let's connect professionally</p>
+            </div>
+            <i class="fas fa-arrow-right text-gray-500 group-hover:text-sky-400 transition-transform group-hover:translate-x-1"></i>
+          </a>
+          
+          <!-- CV Download card with file icon highlight -->
+          <a href="#" id="cvLink" target="_blank" class="action-item group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-sky-400/50 hover-lift">
+            <div class="w-12 h-12 rounded-xl bg-rose-500/20 flex items-center justify-center text-rose-400 group-hover:bg-rose-500/30 transition-colors">
+              <i class="fas fa-file-pdf text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-lg" id="cvText">Resume / CV</h3>
+              <p class="text-sm text-gray-400 group-hover:text-gray-300">Download latest version (PDF)</p>
+            </div>
+            <i class="fas fa-download text-gray-500 group-hover:text-rose-400 transition-transform group-hover:translate-y-0.5"></i>
+          </a>
+        </div>
+        
+        <!-- Social / Tech Stack mini indicators (modern touch) -->
+        <div class="mt-8 pt-4 border-t border-white/10 flex flex-wrap justify-center gap-5 text-gray-400 text-sm">
+          <div class="flex items-center gap-2"><i class="fab fa-react text-sky-400"></i> React</div>
+          <div class="flex items-center gap-2"><i class="fab fa-node-js text-emerald-400"></i> Node.js</div>
+          <div class="flex items-center gap-2"><i class="fab fa-python text-blue-400"></i> Python</div>
+          <div class="flex items-center gap-2"><i class="fas fa-database text-amber-400"></i> SQL/NoSQL</div>
+        </div>
+        
+        <!-- Footer micro note / last update -->
+        <div class="mt-6 text-center text-gray-500 text-xs flex justify-center gap-4">
+          <span><i class="far fa-envelope mr-1"></i> ayman.ennajy@example.com</span>
+          <span class="hidden sm:inline-block">•</span>
+          <span><i class="far fa-calendar-alt mr-1"></i> Available for opportunities</span>
+        </div>
+      </div>
+    </div>
+  </main>
 
-  <a href="https://ennajy-mohamed-ayman.vercel.app/" class="action-card">
-    <i class="fas fa-briefcase"></i>
-    <span id="portfolioText">Voir mon portfolio</span>
-  </a>
-
-  <a href="https://www.linkedin.com/in/mohamed-ayman-ennajy-1689a0258/" class="action-card">
-    <i class="fa-brands fa-linkedin"></i>
-    <span id="linkedinText">Mon LinkedIn</span>
-  </a>
-
-  <a href="#" id="cvLink" class="action-card" target="_blank">
-    <i class="fas fa-file-pdf"></i>
-    <span id="cvText">Télécharger mon CV</span>
-  </a>
-
-</div>
-
-<script>
-/* ================= THEME ================= */
-const body = document.body;
-const themeBtn = document.getElementById('themeToggle');
-const icon = themeBtn.querySelector('i');
-
-if(localStorage.getItem('theme') === 'light'){
-  body.classList.add('light-mode');
-  icon.classList.replace('fa-moon','fa-sun');
-}
-
-themeBtn.onclick = () => {
-  body.classList.toggle('light-mode');
-  const isLight = body.classList.contains('light-mode');
-  icon.classList.toggle('fa-sun');
-  icon.classList.toggle('fa-moon');
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
-}
-
-/* ================= LANGUAGE ================= */
-const langBtn = document.getElementById('langToggle');
-
-const texts = {
-  fr: {
-    title: "Développeur Web Full-Stack",
-    portfolio: "Voir mon portfolio",
-    linkedin: "Mon LinkedIn",
-    cv: "Télécharger mon CV",
-    cvLink: "https://aymanennajy.github.io/Qr-code/Ennajy_Mohamed_Ayman.pdf"
-  },
-  en: {
-    title: "Full Stack Web Developer",
-    portfolio: "View my portfolio",
-    linkedin: "My LinkedIn",
-    cv: "Download my CV",
-    cvLink: "https://aymanennajy.github.io/Qr-code/Ennajy_Mohamed_Ayman_EN.pdf"
-  }
-};
-
-let currentLang = localStorage.getItem('lang') || 'fr';
-
-function updateLang(lang){
-  document.getElementById('title').innerText = texts[lang].title;
-  document.getElementById('portfolioText').innerText = texts[lang].portfolio;
-  document.getElementById('linkedinText').innerText = texts[lang].linkedin;
-  document.getElementById('cvText').innerText = texts[lang].cv;
-  document.getElementById('cvLink').href = texts[lang].cvLink;
-
-  langBtn.innerText = lang === 'fr' ? 'EN' : 'FR';
-  localStorage.setItem('lang', lang);
-}
-
-updateLang(currentLang);
-
-langBtn.onclick = () => {
-  currentLang = currentLang === 'fr' ? 'en' : 'fr';
-  updateLang(currentLang);
-};
-</script>
-
+  <script>
+    // --------------------------------------------------------------
+    // 1. ADVANCED THEME MANAGEMENT (light/dark with system preference)
+    // --------------------------------------------------------------
+    const bodyEl = document.body;
+    const themeBtn = document.getElementById('themeToggle');
+    const themeIcon = themeBtn.querySelector('i');
+    
+    // apply theme function with dynamic class updates for tailwind dark/light
+    function setTheme(themeMode) {
+      if (themeMode === 'light') {
+        bodyEl.classList.add('light');
+        bodyEl.style.backgroundColor = '#f1f5f9';
+        bodyEl.style.color = '#0f172a';
+        // override card backgrounds dynamically (tailwind classes replaced by style)
+        document.querySelectorAll('.action-item, .relative.bg-\\[\\#111111\\]\\/80').forEach(el => {
+          if (el.classList.contains('action-item')) {
+            el.classList.add('bg-white/80', 'border-gray-200');
+            el.classList.remove('bg-white/5', 'border-white/10');
+          }
+        });
+        const mainCard = document.querySelector('.relative.bg-\\[\\#111111\\]\\/80');
+        if (mainCard) {
+          mainCard.classList.add('bg-white/90', 'border-gray-200/60');
+          mainCard.classList.remove('bg-[#111111]/80', 'border-white/10');
+        }
+        // text adjustments for light mode
+        document.querySelectorAll('.text-gray-400').forEach(el => {
+          if (el.classList.contains('group-hover:text-gray-300')) return;
+          el.classList.add('text-gray-500');
+          el.classList.remove('text-gray-400');
+        });
+        document.querySelectorAll('.border-white\\/10').forEach(el => {
+          el.classList.add('border-gray-200/60');
+          el.classList.remove('border-white/10');
+        });
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        bodyEl.classList.remove('light');
+        bodyEl.style.backgroundColor = '#0a0a0a';
+        bodyEl.style.color = '#eef2ff';
+        document.querySelectorAll('.action-item').forEach(el => {
+          el.classList.add('bg-white/5', 'border-white/10');
+          el.classList.remove('bg-white/80', 'border-gray-200');
+        });
+        const mainCard = document.querySelector('.relative.bg-white\\/90');
+        if (mainCard) {
+          mainCard.classList.add('bg-[#111111]/80', 'border-white/10');
+          mainCard.classList.remove('bg-white/90', 'border-gray-200/60');
+        }
+        document.querySelectorAll('.text-gray-500').forEach(el => {
+          if (el.classList.contains('group-hover:text-gray-300')) return;
+          el.classList.add('text-gray-400');
+          el.classList.remove('text-gray-500');
+        });
+        document.querySelectorAll('.border-gray-200\\/60').forEach(el => {
+          el.classList.add('border-white/10');
+          el.classList.remove('border-gray-200/60');
+        });
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+      localStorage.setItem('theme', themeMode);
+    }
+    
+    // detect saved theme or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      setTheme('light');
+    } else if (savedTheme === 'dark') {
+      setTheme('dark');
+    } else {
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      setTheme(prefersLight ? 'light' : 'dark');
+    }
+    
+    themeBtn.addEventListener('click', () => {
+      const isLight = bodyEl.classList.contains('light');
+      setTheme(isLight ? 'dark' : 'light');
+    });
+    
+    // handle dynamic classes on load for action items & border resets (ensure consistency)
+    function syncLightModeClasses() {
+      if (bodyEl.classList.contains('light')) {
+        document.querySelectorAll('.action-item').forEach(el => {
+          el.classList.add('bg-white/80', 'border-gray-200');
+          el.classList.remove('bg-white/5', 'border-white/10');
+        });
+        const card = document.querySelector('.relative');
+        if (card && card.classList.contains('bg-[#111111]/80')) {
+          card.classList.add('bg-white/90', 'border-gray-200/60');
+          card.classList.remove('bg-[#111111]/80', 'border-white/10');
+        }
+        document.querySelectorAll('.text-gray-400').forEach(el => {
+          if (!el.classList.contains('group-hover:text-gray-300')) 
+            el.classList.add('text-gray-500');
+          el.classList.remove('text-gray-400');
+        });
+      } else {
+        document.querySelectorAll('.action-item').forEach(el => {
+          el.classList.add('bg-white/5', 'border-white/10');
+          el.classList.remove('bg-white/80', 'border-gray-200');
+        });
+        const cardLight = document.querySelector('.relative.bg-white\\/90');
+        if (cardLight) {
+          cardLight.classList.add('bg-[#111111]/80', 'border-white/10');
+          cardLight.classList.remove('bg-white/90', 'border-gray-200/60');
+        }
+        document.querySelectorAll('.text-gray-500').forEach(el => {
+          if (!el.classList.contains('group-hover:text-gray-300')) 
+            el.classList.add('text-gray-400');
+          el.classList.remove('text-gray-500');
+        });
+      }
+    }
+    setTimeout(syncLightModeClasses, 10);
+    
+    // --------------------------------------------------------------
+    // 2. BILINGUAL SYSTEM (FR/EN) with extended text
+    // --------------------------------------------------------------
+    const langBtn = document.getElementById('langToggle');
+    
+    const dictionary = {
+      fr: {
+        title: "Développeur Full-Stack",
+        portfolio: "Portfolio",
+        linkedin: "LinkedIn",
+        cv: "CV / Résumé",
+        cvLink: "https://aymanennajy.github.io/Qr-code/Ennajy_Mohamed_Ayman.pdf"
+      },
+      en: {
+        title: "Full Stack Developer",
+        portfolio: "Portfolio",
+        linkedin: "LinkedIn",
+        cv: "Resume / CV",
+        cvLink: "https://aymanennajy.github.io/Qr-code/Ennajy_Mohamed_Ayman_EN.pdf"
+      }
+    };
+    
+    let currentLanguage = localStorage.getItem('lang') || 'fr';
+    
+    function applyLanguage(lang) {
+      document.getElementById('title').innerText = dictionary[lang].title;
+      document.getElementById('portfolioText').innerText = dictionary[lang].portfolio;
+      document.getElementById('linkedinText').innerText = dictionary[lang].linkedin;
+      document.getElementById('cvText').innerText = dictionary[lang].cv;
+      const cvAnchor = document.getElementById('cvLink');
+      if (cvAnchor) cvAnchor.href = dictionary[lang].cvLink;
+      
+      // update button label
+      langBtn.innerText = lang === 'fr' ? 'EN' : 'FR';
+      localStorage.setItem('lang', lang);
+    }
+    
+    applyLanguage(currentLanguage);
+    
+    langBtn.addEventListener('click', () => {
+      currentLanguage = currentLanguage === 'fr' ? 'en' : 'fr';
+      applyLanguage(currentLanguage);
+    });
+    
+    // extra: small hover effect on profile image alt message (optional)
+    const profileImgDiv = document.querySelector('.profile-img-border');
+    if(profileImgDiv) {
+      profileImgDiv.addEventListener('mouseenter', () => {
+        // just subtle micro class (no console)
+      });
+    }
+    
+    // ensure on window resize or any dynamic content, fix card class theme
+    window.addEventListener('load', () => {
+      syncLightModeClasses();
+      // adjust for any missing interactive details
+      const cvLinkElem = document.getElementById('cvLink');
+      if (cvLinkElem && cvLinkElem.getAttribute('href') === '#') {
+        cvLinkElem.href = currentLanguage === 'fr' ? dictionary.fr.cvLink : dictionary.en.cvLink;
+      }
+    });
+    
+    // preload images & fix broken fallback (optional but no error)
+    const userImg = document.querySelector('img');
+    if(userImg && !userImg.complete) {
+      userImg.onerror = () => {
+        userImg.src = 'https://ui-avatars.com/api/?background=0EA5E9&color=fff&bold=true&size=128&name=Ayman+E';
+      };
+    }
+    
+    // additional hover enhancements for action cards: already have hover-lift in css
+    // make icons responsive & ensure mobile tap targets.
+    const allCards = document.querySelectorAll('.action-item');
+    allCards.forEach(card => {
+      card.addEventListener('touchstart', () => {}, {passive: true});
+    });
+    
+    // scroll reveal subtle entrance (not needed but improves feel)
+    const mainContainer = document.querySelector('.relative.bg-\\[\\#111111\\]\\/80');
+    if (mainContainer) {
+      mainContainer.style.opacity = '0';
+      mainContainer.style.transform = 'translateY(18px)';
+      mainContainer.style.transition = 'opacity 0.55s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.5s ease';
+      setTimeout(() => {
+        mainContainer.style.opacity = '1';
+        mainContainer.style.transform = 'translateY(0)';
+      }, 80);
+    }
+  </script>
 </body>
 </html>
