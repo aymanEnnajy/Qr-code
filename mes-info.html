@@ -171,6 +171,7 @@
               <i class="fas fa-file-pdf text-lg sm:text-xl"></i>
             </div>
             <div class="flex-1">
+              
               <h3 class="font-semibold text-base sm:text-lg" id="cvText">Resume / CV</h3>
               <p class="text-xs text-gray-400 group-hover:text-gray-300">Download latest version (PDF)</p>
             </div>
@@ -313,21 +314,21 @@
     const langBtn = document.getElementById('langToggle');
     
     const dictionary = {
-      fr: {
-        title: "Développeur Full-Stack",
-        portfolio: "Portfolio",
-        linkedin: "LinkedIn",
-        cv: "CV / Résumé",
-        cvLink: "https://github.com/aymanEnnajy/Qr-code/blob/b7ed37d5a35acd9075dd518f55fe9114090ad8c4/ENNAJY_MOHAMED_AYMAN_FR.pdf"
-      },
-      en: {
-        title: "Full Stack Developer",
-        portfolio: "Portfolio",
-        linkedin: "LinkedIn",
-        cv: "Resume / CV",
-        cvLink: "https://github.com/aymanEnnajy/Qr-code/blob/b7ed37d5a35acd9075dd518f55fe9114090ad8c4/ENNAJY_MOHAMED_AYMAN_EN.pdf"
-      }
-    };
+  fr: {
+    title: "Développeur Full-Stack",
+    portfolio: "Portfolio",
+    linkedin: "LinkedIn",
+    cv: "CV / Résumé",
+    cvLink: "https://raw.githubusercontent.com/aymanEnnajy/Qr-code/b7ed37d5a35acd9075dd518f55fe9114090ad8c4/ENNAJY_MOHAMED_AYMAN_FR.pdf"
+  },
+  en: {
+    title: "Full Stack Developer",
+    portfolio: "Portfolio",
+    linkedin: "LinkedIn",
+    cv: "Resume / CV",
+    cvLink: "https://raw.githubusercontent.com/aymanEnnajy/Qr-code/b7ed37d5a35acd9075dd518f55fe9114090ad8c4/ENNAJY_MOHAMED_AYMAN_EN.pdf"
+  }
+};
     
     let currentLanguage = localStorage.getItem('lang') || 'fr';
     
